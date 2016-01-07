@@ -7,8 +7,8 @@
   class Matrix -- models a square matrix
 
   TASK: Implement methods below.
-        Categorize runtime of each. 
-        Test in your main method.
+  Categorize runtime of each. 
+  Test in your main method.
   ====================================*/ 
 
 public class Matrix {
@@ -30,81 +30,81 @@ public class Matrix {
 	matrix = new Object[a][a];
     } //O(1)
 
-	//*****NEW METHODS HERE FOR HW55
-	//returns values in row r as an array
-	public Object[] getRow(int r){
-		return matrix[r];
-	} //O(1)
+    //*****NEW METHODS HERE FOR HW55
+    //returns values in row r as an array
+    public Object[] getRow(int r){
+	return matrix[r];
+    } //O(1)
 	
-	//returns values in column c as an array
-	public Object[] getCol(int c){
-		Object[] col = new Object[this.size()];
-		for (int i = 0; i < this.size(); i++){ //for each row
-			col[i] = this.get(i, c); //add val in specified column to return array
+    //returns values in column c as an array
+    public Object[] getCol(int c){
+	Object[] col = new Object[this.size()];
+	for (int i = 0; i < this.size(); i++){ //for each row
+	    col[i] = this.get(i, c); //add val in specified column to return array
+	}
+	return col;
+    } //O(n)	
+	
+    //takes row number r and an array newRow
+    //sets row r to the values in newRow
+    //returns old row before change
+    public Object[] setRow(int r, Object[] newRow){
+	Object[] tmp = this.getRow(r);
+	matrix[r] = newRow;
+	return tmp;
+    } //O(1)
+	
+    //takes column number c and an array newCol
+    //sets column c to the values in newCol
+    //returns old column before change
+    public Object[] setCol(int c, Object[] newCol){
+	Object[] temp = this.getCol(c);
+	for (int i = 0; i < this.size(); i++) { //for each row
+	    this.set(i,c, newCol[i]); //set new val to val found in newCol at row index
+	}
+	return temp;
+    } //O(n)
+	
+    //return true if matrix is full
+    public boolean isFull(){
+	//loops through each element
+	for (int row = 0; row < matrix.length; row++){
+	    for (int col = 0; col < matrix[0].length; col++){
+		if (matrix[row][col] == null){
+		    return false; //not full if object is null
 		}
-		return col;
-	} //O(n)	
-	
-	//takes row number r and an array newRow
-	//sets row r to the values in newRow
-	//returns old row before change
-	public Object[] setRow(int r, Object[] newRow){
-		Object[] tmp = this.getRow(r);
-		matrix[r] = newRow;
-		return tmp;
-	} //O(1)
-	
-	//takes column number c and an array newCol
-	//sets column c to the values in newCol
-	//returns old column before change
-	public Object[] setCol(int c, Object[] newCol){
-		Object[] temp = this.getCol(c);
-		for (int i = 0; i < this.size(); i++) { //for each row
-			this.set(i,c, newCol[i]); //set new val to val found in newCol at row index
-		}
-		return temp;
-	} //O(n)
-	
-	//return true if matrix is full
-	public boolean isFull(){
-		//loops through each element
-		for (int row = 0; row < matrix.length; row++){
-			for (int col = 0; col < matrix[0].length; col++){
-				if (matrix[row][col] == null){
-					return false; //not full if object is null
-				}
-			}
-		}
-		return true;
-	} //O(n^2)
+	    }
+	}
+	return true;
+    } //O(n^2)
 		
-	//returns true if Object o is in this array
-	//false otherwise
-	public boolean contains(Object o){
-		for (int row = 0; row < this.size(); row++) {
-			for (int col = 0; col < this.size(); col++) {
-				if (!isEmpty(row, col) && this.get(row,col).equals(o)) //if object found in this position
-					return true;
-			}
-		}
-		return false;
-	} //O(n^2)
+    //returns true if Object o is in this array
+    //false otherwise
+    public boolean contains(Object o){
+	for (int row = 0; row < this.size(); row++) {
+	    for (int col = 0; col < this.size(); col++) {
+		if (!isEmpty(row, col) && this.get(row,col).equals(o)) //if object found in this position
+		    return true;
+	    }
+	}
+	return false;
+    } //O(n^2)
 	
-	//transposes a matrix
-	//algo: draw diagonal from top left to bottom right
-	//      swap values above that diagonal with element w/ switched row/col 
-	public void transpose() {
-		for (int row = 0; row < this.size(); row++) {
-			for (int col = 0; col < this.size(); col++) {
-				if ( row < col ){ //only swap vals above diagonal
-					//swap
-					Object tmp = this.get(row,col);
-					this.set(row, col, this.get(col, row));
-					this.set(col, row, tmp);
-				}
-			}
+    //transposes a matrix
+    //algo: draw diagonal from top left to bottom right
+    //      swap values above that diagonal with element w/ switched row/col 
+    public void transpose() {
+	for (int row = 0; row < this.size(); row++) {
+	    for (int col = 0; col < this.size(); col++) {
+		if ( row < col ){ //only swap vals above diagonal
+		    //swap
+		    Object tmp = this.get(row,col);
+		    this.set(row, col, this.get(col, row));
+		    this.set(col, row, tmp);
 		}
-	} //O(n^2)
+	    }
+	}
+    } //O(n^2)
 	
 
     //return size of this matrix, where size is 1 dimension
@@ -121,7 +121,7 @@ public class Matrix {
 	
     //return true if this matrix is empty, false otherwise
     private boolean isEmpty( int r, int c ) {
-		return get(r,c) == null;
+	return get(r,c) == null;
     } //O(1)
 
 
@@ -152,30 +152,30 @@ public class Matrix {
     //criteria for equality: matrices have identical dimensions,
     // and identical values in each slot
     public boolean equals( Object rightSide ) {
-		//check to make sure rightSide is a Matrix
-		if (!( rightSide instanceof Matrix )){
-		    return false;
-		}
+	//check to make sure rightSide is a Matrix
+	if (!( rightSide instanceof Matrix )){
+	    return false;
+	}
 	
-		Matrix other = (Matrix) rightSide; //type cast rightside into other
+	Matrix other = (Matrix) rightSide; //type cast rightside into other
 
-		//check to see if same dimensions
-		if ( this.size() == other.size() && //check if # rows same
-	    	matrix.length == other.matrix.length ){ //if #rows is same
+	//check to see if same dimensions
+	if ( this.size() == other.size() && //check if # rows same
+	     matrix.length == other.matrix.length ){ //if #rows is same
 	    
-	    		//check to see if identical values in each slot
-	    		for (int i = 0; i < this.size(); i++){ //for each row #
-				for (int k = 0; k < matrix[i].length; k++){ //for each column/index in this row
-		    		if (!( !isEmpty(i,k) && this.get(i,k).equals(other.get(i,k)) )){ //if vals at same index not equal
-						return false;
-		    		}
-				}
-	    	} //exits only if all vals match at proper indices
-	    	return true;
+	    //check to see if identical values in each slot
+	    for (int i = 0; i < this.size(); i++){ //for each row #
+		for (int k = 0; k < matrix[i].length; k++){ //for each column/index in this row
+		    if (!( !isEmpty(i,k) && this.get(i,k).equals(other.get(i,k)) )){ //if vals at same index not equal
+			return false;
+		    }
 		}
+	    } //exits only if all vals match at proper indices
+	    return true;
+	}
 	
-		//line only executed if if block doesn't return anything
-		return false;
+	//line only executed if if block doesn't return anything
+	return false;
     } //O(n^2)
 
 
@@ -220,7 +220,7 @@ public class Matrix {
 	Matrix Q = new Matrix(1);
 	Q.set(0,0, "hola");
 	System.out.println(Q);
-    System.out.println(M.equals(Q) + "\n"); //false
+	System.out.println(M.equals(Q) + "\n"); //false
 
 	//test equals with "identical larger" matrix
 	Matrix P = new Matrix(3);
@@ -287,9 +287,9 @@ public class Matrix {
 	System.out.println("New M:\n" + M);
 	
  	//test transpose()
-    System.out.println("M before transposition:\n" + M);
-    M.transpose();
-    System.out.println("M after transposition:\n" + M);
+	System.out.println("M before transposition:\n" + M);
+	M.transpose();
+	System.out.println("M after transposition:\n" + M);
 
     }
 }//end class Matrix
